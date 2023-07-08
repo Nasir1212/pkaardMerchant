@@ -1,95 +1,112 @@
-import Image from 'next/image'
-import styles from './page.module.css'
-
+'use client';
+import Link from "next/link";
+import "./login.css"
+import FailedToaster from "../../Component/FailedToaster";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import http from "../../Component/http";
+import swal from "sweetalert";
+import SessionExport from "../../Component/SessionExport";
+import { SET_USER_LOG_DATA } from "../../Redux/Reducers/LoginAction";
+import { useRouter } from 'next/navigation';
 export default function Home() {
+ const dispatch = useDispatch();
+const [formData, setFormData] = useState();
+const router =  useRouter();
+
+  
+ const handleChange = (e)=>{
+
+setFormData(value => ({...value,[e.target.name]:e.target.value}))
+  }
+
+  const handleSignIn = ()=>{
+    http.post('/login',JSON.stringify(formData))
+    .then(data=>{
+      
+      if(data.data['status'] == true){
+        SessionExport.setSession(data.data);
+        dispatch(SET_USER_LOG_DATA([data.data['status'],data.data['data']]))
+        swal("Thanks !", "You have successfully logged!", "success")
+        router.push("/User/home");
+      }else{
+        swal("Opps!","Phone number or Password not matched","error")
+      }
+    })
+  }
+
+  const {is_Login} = useSelector((state)=>state.loginAction);
+
+
+  useEffect(()=>{
+
+    if(is_Login==true){
+      router.push("/User/home");
+    }
+
+  },[])
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+   <>
+ 
+
+ <div className="container-fluid">
+  <div className="row">
+    
+   
+    <div className="col-12">
+
+    
+      <div className="log_in_container">
+    
+        <div  className="login_col" >
+
+
+
+      <div>
+      <h5 className="text-center text-danger" style={{fontWeight:"bold"}}>Pkaard Merchant Login</h5>
+ <br/>
+ <br/>
+        
+        <div className="form-group">
+          <label htmlFor="">Phone Number</label>
+          <input type="text" name="phone_number" onChange={(e)=>handleChange(e)} id="" className="form-control" placeholder="Enter phone number" />
         </div>
+
+        <div className="form-group">
+          <label htmlFor="">Password </label>
+          <input type="password" name="password" onChange={(e)=>handleChange(e)}  className="form-control" placeholder="Enter password" />
+        </div>
+        <div>
+          <br/>
+          <a className="text-danger" style={{fontWeight:"bold"}} href="#" >Forgot Password?</a>
+          
+        </div>
+        <br/>
+        <div className="d-flex justify-content-between">
+          <button onClick={handleSignIn} className="btn btn btn-danger"> Sign In</button>
+          <div><span>Don't have an account?   <Link className="text-danger " style={{fontWeight:"bold"}} href="/signup" role="button">Sign Up</Link></span> 
+       
+           </div>
+        </div>
+        </div>
+
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
       </div>
+    </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+  </div>
+  
+ </div>
+ <ToastContainer />
+ <footer>
+  <div>
+    <p>© Copyright by Pkaard Ltd.|Terms & Conditions</p>
+  </div>
+ </footer>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+ 
+  </>
   )
 }
