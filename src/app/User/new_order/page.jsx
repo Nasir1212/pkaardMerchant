@@ -2,6 +2,7 @@
 import { useState,useEffect } from "react";
 import { useSelector } from "react-redux";
 import http from "../../../../Component/http";
+import Link from "next/link";
 
   function  NewOrder() {
   const [OrderData, setOrderData]= useState([]);
@@ -65,13 +66,15 @@ import http from "../../../../Component/http";
                     return(<>
                      <tr key={i}>
                      <td>{i++}</td>
-                     <td>{d['card_registation_card_id']}</td>
+                     <td>1509002{d['card_registation_card_id']}</td>
                      <td>{d['contact_full_name']}</td>
                     
                      <td>01890492444</td>
                      <td>450 TK</td>
                      <td>
-                         <button className="btn btn-info btn-sm btn-block">Active</button>
+
+                     <Link href="User/get_bill" className="btn btn-info btn-sm btn-block">Get Bill </Link> 
+                 
                      </td>
                  </tr>
                  </>)

@@ -261,6 +261,25 @@ overflow: auto;
   margin-top: 2rem;
 }
 
+.pkaard_logo {
+  width: 7rem;
+  display: block;
+  height: 3rem;
+  margin: auto;
+}
+.heading_title {
+  transform: translateY(40px);
+}
+
+.reward_point {
+  float: right;
+  margin-right: 3rem;
+  font-weight: bold;
+  border: 1px solid;
+  padding: 0.4rem 1rem;
+  background: #e2ce33;
+  border-radius: 0.3rem;
+}
 @media screen and (max-width: 980px){
   .custom_btn{
     transform: translateX(3rem);

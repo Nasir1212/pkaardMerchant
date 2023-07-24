@@ -45,11 +45,66 @@ function Home() {
             <div>
                 <div style={{marginLeft:"1rem",marginTop:"1rem"}}>
                     <b>Dashboard</b>
+
+                    <div className="reward_point">
+                    Reward Point <span>933</span> 
+                    </div>
                 </div>
               <br />
                 <div className="card">
                     <div className="card-header">
                        <div className="div"><b>Earning Status</b></div>
+                    </div>
+                    <div className="card-body ">
+
+                        <div className="custom_row dashboard_row">
+
+                        <div className="card c_card text-center custom_bg_card m-1">
+                            <div className="custom_card_header mt-2">
+                              <h5> <b >৳</b><b>500</b> </h5>
+                            </div>
+                            <div>
+                                <p  className="text-white font_bold "> <i class="fas fa-money-bill-alt    "></i> Daily income</p>
+                            </div>
+                        </div>
+
+                        <div className="card c_card text-center custom_bg_card m-1">
+                            <div className="custom_card_header mt-2">
+                              <h5> <b >৳</b><b>1700</b> </h5>
+                            </div>
+                            <div>
+                                <p  className="text-white font_bold"> <i class="fas fa-money-bill-wave-alt    "></i> Monthly income</p>
+                            </div>
+                        </div>
+
+                        <div className="card c_card text-center custom_bg_card m-1">
+                            <div className="custom_card_header mt-2">
+                              <h5> <b >৳</b><b>23675</b> </h5>
+                            </div>
+                            <div>
+                                <p  className="text-white font_bold"> <i class="fas fa-money-check-alt    "></i> Yearly income</p>
+                            </div>
+                        </div>
+
+                        <div className="card c_card text-center custom_bg_card m-1">
+                            <div className="custom_card_header mt-2">
+                              <h5> <b >৳</b><b>542390</b> </h5>
+                            </div>
+                            <div>
+                                <p  className="text-white font_bold"><i class="fas fa-money-bill-alt    "></i> Total income</p>
+                            </div>
+                        </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <br />
+                <div className="card">
+                    <div className="card-header">
+                       <div className="div"><b>Discount Status</b></div>
                     </div>
                     <div className="card-body ">
 

@@ -43,6 +43,7 @@ if(SessionExport.Session()){
     <button onClick={handleClick} className='custom_btn'><i className="fa fa-bars"></i></button>
     </div>
     <ul className='d-flex justify-content-around align-items-center mt-2 mr-2'>
+   
       <li>
         <Link href="/User/affiliation_profile"> <div className="profile_img" style={{width:'30px',height:'30px'}}> <img src='/profile.png'/></div>   </Link>
       </li>

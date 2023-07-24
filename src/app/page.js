@@ -65,7 +65,7 @@ setFormData(value => ({...value,[e.target.name]:e.target.value}))
 
 
       <div>
-      <h5 className="text-center text-danger" style={{fontWeight:"bold"}}>Pkaard Merchant Login</h5>
+      <h5 className="text-center text-muted heading_title" style={{fontWeight:"bold"}}> <div className="pkaard_logo"><img src="https://pkaard.com/assets/images/pkaard_logo.jpeg"/></div>  Merchant Panel </h5>
  <br/>
  <br/>
         
