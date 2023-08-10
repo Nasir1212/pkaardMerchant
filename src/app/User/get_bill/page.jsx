@@ -42,15 +42,37 @@ console.log(privilege);
 if(Number(privilege) != NaN){
 
     let discount = value * Number(privilege) /100;
-    let payable_price = value - discount;
-    let charge = payable_price * 1 /100;
-    let vat = charge * 15 /100;
+    let payable_price = value - discount.toFixed(2);
+    let charge = (payable_price.toFixed(2)) * 1 /100;
+    let vat = (charge.toFixed(2)) * 15 /100;
 
     let grand_total = charge + vat;
 
-    setCalculator(value=>({...value,myDiscount:discount,myPayablePrice:payable_price,grandTotal:grand_total,Vat:vat,Charge:charge}))
+    setCalculator(value=>({...value,myDiscount:discount,myPayablePrice:payable_price,grandTotal:grand_total.toFixed(2),Vat:vat.toFixed(2),Charge:charge.toFixed(2)}))
 }
 
+
+}
+
+function handleBill(){
+    
+    let {card_holder,id,payable_price,affiliation_id,product_table_id} = orderData[0];
+    let {myPayablePrice,grandTotal} = Calculator;
+
+    if(myPayablePrice== NaN){
+        alert("Not Corrected Calculate");
+        return;
+    }
+
+    let jsonData = {
+        product_id:product_table_id,
+        customer_registation_no:card_holder,
+        affiliation_partner_id:affiliation_id,
+        payment:payable_price == null ? myPayablePrice:payable_price ,
+        charge:payable_price == null ? grandTotal:null ,
+    }
+
+    console.log(jsonData)
 
 }
 console.log(Calculator)
@@ -109,14 +131,14 @@ console.log(Calculator)
                     </td>
                 </tr>
 
-                <tr>
+                <tr  style={Calculator['myPayablePrice'] == null? {display:"none"}:{display:""}}>
                     <td>Pkaard Charge </td>
                     <td style={{fontSize:"11px"}}> Charge <b>{Calculator['Charge']}</b> tk VAT(15%) <b>{Calculator['Vat']}</b> tk Grand Total <b>{Calculator['grandTotal']}</b>tk  </td>
                 </tr>
 
                 <tr>
                     <td></td>
-                    <td><button className="btn btn-success">Submit</button></td>
+                    <td>< button onClick={(e)=>handleBill(e)} className="btn btn-success">Submit</button></td>
                 </tr>
             </tbody>
         </table>
