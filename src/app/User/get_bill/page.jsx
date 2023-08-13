@@ -17,6 +17,7 @@ useEffect( ()=>{
     getData();
  },[])
 
+ 
  function getData() {
 
  http.get(`order_card_holder_by_tid/${order_id}`)
@@ -65,6 +66,7 @@ function handleBill(){
     }
 
     let jsonData = {
+        table_id:id,
         product_id:product_table_id,
         customer_registation_no:card_holder,
         affiliation_partner_id:affiliation_id,
@@ -72,7 +74,20 @@ function handleBill(){
         charge:payable_price == null ? grandTotal:null ,
     }
 
-    console.log(jsonData)
+   
+
+    http.post('/order_confirmation_history',JSON.stringify(jsonData))
+    .then(data=>{
+        console.log(data.data)
+      if(data.data['condition'] == true){
+        
+        swal("Thanks !", `${data.data['message']}`, "success")
+        getData();
+        router.push("/User/new_order");
+      }else{
+        swal("Opps!",`${data.data['message']}`,"error")
+      }
+    })
 
 }
 console.log(Calculator)

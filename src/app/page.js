@@ -17,7 +17,6 @@ const router =  useRouter();
 
   
  const handleChange = (e)=>{
-
 setFormData(value => ({...value,[e.target.name]:e.target.value}))
   }
 

@@ -264,15 +264,16 @@ overflow: auto;
   left: 30%;
 }
 
+
 .signup_col {
   width: 95%;
   margin: 0 auto;
   box-shadow: 0px 1px 6px 0px gray;
   padding: 1.5rem;
-  background: white;
+  background: linear-gradient(181deg, #ff00000f 60% , #ffff0029 );
   margin-top: 2rem;
-}
-
+  background-color: white;
+} 
 .pkaard_logo {
   width: 7rem;
   display: block;
@@ -282,7 +283,10 @@ overflow: auto;
 .heading_title {
   transform: translateY(40px);
 }
-
+.custom_require{
+  color: red;
+  font-weight: bold;
+}
 .reward_point {
   float: right;
   margin-right: 3rem;
